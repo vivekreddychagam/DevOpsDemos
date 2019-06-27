@@ -34,11 +34,11 @@
 1. Create a Route53 private hosted zone (you can create Public hosted zone if you have a domain)
 1. create an S3 bucket 
    ```sh
-    aws s3 mb s3://dev.k8s.valaxy.in
+    aws s3 mb s3://dominename
    ```
 1. Expose environment variable:
    ```sh 
-    export KOPS_STATE_STORE=s3://dev.k8s.valaxy.in
+    export KOPS_STATE_STORE=s3://dominename
    ```
 1. Create sshkeys before creating cluster
    ```sh
@@ -46,11 +46,11 @@
    ```
 1. Create kubernetes cluster definitions on S3 bucket 
    ```sh 
-    kops create cluster --cloud=aws --zones=ap-southeast-1b --name=dev.k8s.valaxy.in --dns-zone=valaxy.in --dns private
+    kops create cluster --cloud=aws --zones=us-east-1 --name=clustername --dns-zone=dominename --dns private
     ```
 1. Create kubernetes cluser
     ```sh 
-      kops update cluster dev.k8s.valaxy.in --yes
+      kops update cluster clustername --yes
      ```
 1. Validate your cluster 
      ```sh 
@@ -79,3 +79,8 @@
     ```sh
      kops delete cluster dev.k8s.valaxy.in --yes
     ```
+    
+    to get dashboard run the following commands
+    
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+    kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8001
