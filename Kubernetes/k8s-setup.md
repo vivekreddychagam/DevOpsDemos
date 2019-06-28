@@ -83,4 +83,6 @@
     to get dashboard run the following commands
     
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+    
+run the following command    
     kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8001
